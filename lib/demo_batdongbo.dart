@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:batdongbo_29112021/demo1_model.dart';
 import 'package:dio/dio.dart';
 
 void main(){
@@ -16,8 +17,8 @@ void main(){
   dio
       .get(urlDemo1)
       .then((value){
-          Map<String,dynamic> data = value.data;
-          print(data["monhoc"]);
+          var data = Demo1.fromJSON(value.data);
+          print(data.toString());
       })
       .catchError((error) => print("Error $error"));
 }

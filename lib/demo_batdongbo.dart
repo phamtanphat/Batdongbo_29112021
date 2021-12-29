@@ -1,13 +1,23 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
+
 void main(){
   // Future<int> data = tinhTong(5, 10);
   // data.then((value) => print(value));
-  doSthing();
-}
 
-void doSthing() async{
-  var data = await Future.delayed(Duration(seconds: 2), () => 1);
-  print("alo");
-  print(data);
+  Dio dio = Dio();
+
+
+  // demo1
+
+  var urlDemo1 = "https://khoapham.vn/KhoaPhamTraining/json/tien/demo1.json";
+
+  dio
+      .get(urlDemo1)
+      .then((value){
+          Map<String,dynamic> data = value.data;
+          print(data["monhoc"]);
+      })
+      .catchError((error) => print("Error $error"));
 }

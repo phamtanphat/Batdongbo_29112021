@@ -1,3 +1,5 @@
+import 'dart:async';
+
 void main(){
   
   // Future<int> data = Future.delayed(Duration(seconds: 2),() => 1);
@@ -20,16 +22,44 @@ void main(){
   //   print(event.toString());
   // });
 
-  Stream stream = Stream.periodic(Duration(seconds: 1),(value){
-    return value;
-  }).asBroadcastStream();
+  // Stream stream = Stream.periodic(Duration(seconds: 1),(value){
+  //   return value;
+  // }).asBroadcastStream();
+  //
+  // stream.take(10).listen((event) {
+  //   print("Location 1 $event");
+  // });
+  //
+  // stream.listen((event) {
+  //   print("Location 2 $event");
+  // });
 
-  stream.take(10).listen((event) {
-    print("Location 1 $event");
+
+  // Stream stream = Stream.periodic(Duration(seconds: 1),(value){
+  //   return value;
+  // }).asBroadcastStream();
+  //
+  // var subscription = stream.listen((event) {
+  //   print("Location 1 $event");
+  // });
+  //
+  //
+  // Future.delayed(Duration(seconds: 4),(){
+  //   subscription.pause();
+  //   subscription.resume();
+  // });
+
+
+  StreamController<int> streamController = StreamController();
+
+
+  streamController.sink.add(123);
+  streamController.sink.add(456);
+  streamController.sink.add(789);
+
+  streamController.stream.listen((event) {
+    print(event.toString());
   });
 
-  stream.listen((event) {
-    print("Location 2 $event");
-  });
 }
 

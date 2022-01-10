@@ -9,18 +9,27 @@ void main(){
   // });
 
 
-  Iterable<int> iterable = genIterates(10);
-  Iterator<int> iterator = iterable.iterator;
 
-  while(iterator.moveNext()){
-    print(iterator.current.toString());
-  }
+  // var data = Iterable.generate(10 ,(index){
+  //   return 5;
+  // });
+  // //
+  // Stream stream = Stream.fromIterable(data);
+  //
+  // stream.listen((event) {
+  //   print(event.toString());
+  // });
+
+  Stream stream = Stream.periodic(Duration(seconds: 1),(value){
+    return value;
+  }).asBroadcastStream();
+
+  stream.take(10).listen((event) {
+    print("Location 1 $event");
+  });
+
+  stream.listen((event) {
+    print("Location 2 $event");
+  });
 }
 
-Iterable<int> genIterates(int max) sync* {
-  var i = 0;
-  while (i < max) {
-    yield i;
-    i++;
-  }
-}
